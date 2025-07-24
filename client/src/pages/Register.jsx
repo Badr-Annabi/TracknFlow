@@ -79,24 +79,226 @@ export default function Register() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-            <div className="w-full max-w-md">
-                {/* Logo and Brand */}
-                <div className="text-center mb-8">
-                    <div className="flex items-center justify-center space-x-3 mb-4">
-                        <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                            <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                            </svg>
+        <div className="min-h-screen bg-gradient-to-br from-green-500 via-teal-600 to-blue-700 flex items-center justify-center p-4 relative overflow-hidden">
+            {/* Animated Background Elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute -top-40 -left-40 w-96 h-96 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
+                <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-teal-300/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '3s'}}></div>
+                <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-green-300/20 rounded-full blur-xl animate-bounce" style={{animationDelay: '2s'}}></div>
+                <div className="absolute bottom-1/3 left-1/4 w-28 h-28 bg-blue-300/20 rounded-full blur-lg animate-bounce" style={{animationDelay: '1s'}}></div>
+            </div>
+
+            {/* Geometric Pattern Overlay */}
+            <div className="absolute inset-0 opacity-20" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20L0 0h40L20 20zm0 0L0 40h40L20 20z'/%3E%3C/g%3E%3C/svg%3E")`
+            }}></div>
+
+            <div className="w-full max-w-6xl flex items-center justify-center relative z-10">
+                {/* Left Side - Team Collaboration Illustration */}
+                <div className="hidden lg:flex lg:w-1/2 items-center justify-center">
+                    <div className="text-center text-white space-y-8">
+                        {/* Main Illustration */}
+                        <div className="relative">
+                            <div className="w-96 h-96 mx-auto relative">
+                                {/* Team Dashboard with Projects */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="relative">
+                                        {/* Background Chat Bubbles */}
+                                        <div className="absolute -top-12 -left-16 w-24 h-16 bg-white/20 rounded-2xl rotate-12 backdrop-blur-sm border border-white/30 animate-float flex items-center justify-center">
+                                            <div className="flex space-x-1">
+                                                <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+                                                <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                                                <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                                            </div>
+                                        </div>
+                                        <div className="absolute -top-8 -right-20 w-28 h-12 bg-white/15 rounded-xl -rotate-6 backdrop-blur-sm border border-white/30 animate-float" style={{animationDelay: '1.5s'}}></div>
+                                        <div className="absolute -bottom-10 -left-20 w-32 h-14 bg-white/25 rounded-2xl rotate-6 backdrop-blur-sm border border-white/30 animate-float" style={{animationDelay: '2.5s'}}></div>
+                                        
+                                        {/* Main Team Dashboard */}
+                                        <div className="w-80 h-64 bg-white/90 rounded-3xl shadow-2xl p-6 backdrop-blur-lg border border-white/50">
+                                            {/* Header with Team Members */}
+                                            <div className="flex items-center justify-between mb-6">
+                                                <div className="flex items-center space-x-3">
+                                                    <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center">
+                                                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <div className="w-20 h-2 bg-gray-300 rounded"></div>
+                                                        <div className="w-16 h-1.5 bg-gray-200 rounded mt-1"></div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex -space-x-2">
+                                                    <div className="w-7 h-7 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full border-2 border-white animate-pulse">
+                                                        <div className="w-full h-full rounded-full flex items-center justify-center">
+                                                            <span className="text-white text-xs font-bold">A</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-7 h-7 bg-gradient-to-br from-blue-400 to-indigo-400 rounded-full border-2 border-white animate-pulse" style={{animationDelay: '0.5s'}}>
+                                                        <div className="w-full h-full rounded-full flex items-center justify-center">
+                                                            <span className="text-white text-xs font-bold">M</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-7 h-7 bg-gradient-to-br from-green-400 to-emerald-400 rounded-full border-2 border-white animate-pulse" style={{animationDelay: '1s'}}>
+                                                        <div className="w-full h-full rounded-full flex items-center justify-center">
+                                                            <span className="text-white text-xs font-bold">S</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-7 h-7 bg-gray-200 rounded-full border-2 border-white flex items-center justify-center">
+                                                        <span className="text-gray-600 text-xs font-bold">+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            {/* Collaborative Project Cards */}
+                                            <div className="space-y-3">
+                                                <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 border-l-4 border-purple-400 animate-float">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex-1">
+                                                            <div className="w-28 h-2 bg-purple-300 rounded mb-2"></div>
+                                                            <div className="w-20 h-1.5 bg-purple-200 rounded"></div>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <div className="flex -space-x-1">
+                                                                <div className="w-5 h-5 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full border border-white"></div>
+                                                                <div className="w-5 h-5 bg-gradient-to-br from-blue-400 to-indigo-400 rounded-full border border-white"></div>
+                                                            </div>
+                                                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-3 border-l-4 border-green-400 animate-float" style={{animationDelay: '1s'}}>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex-1">
+                                                            <div className="w-24 h-2 bg-green-300 rounded mb-2"></div>
+                                                            <div className="w-18 h-1.5 bg-green-200 rounded"></div>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <div className="flex -space-x-1">
+                                                                <div className="w-5 h-5 bg-gradient-to-br from-green-400 to-emerald-400 rounded-full border border-white"></div>
+                                                            </div>
+                                                            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 border-l-4 border-blue-400 animate-float" style={{animationDelay: '2s'}}>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex-1">
+                                                            <div className="w-32 h-2 bg-blue-300 rounded mb-2"></div>
+                                                            <div className="w-22 h-1.5 bg-blue-200 rounded"></div>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <div className="flex -space-x-1">
+                                                                <div className="w-5 h-5 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full border border-white"></div>
+                                                                <div className="w-5 h-5 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full border border-white"></div>
+                                                                <div className="w-5 h-5 bg-gradient-to-br from-green-400 to-emerald-400 rounded-full border border-white"></div>
+                                                            </div>
+                                                            <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Floating Team Icons */}
+                                        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
+                                            <div className="w-12 h-12 bg-white/30 rounded-2xl flex items-center justify-center backdrop-blur-sm animate-bounce border border-white/40">
+                                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div className="absolute -bottom-16 right-1/4">
+                                            <div className="w-10 h-10 bg-white/25 rounded-xl flex items-center justify-center backdrop-blur-sm animate-bounce border border-white/40" style={{animationDelay: '1s'}}>
+                                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <div className="absolute -left-16 bottom-1/4">
+                                            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm animate-bounce border border-white/40" style={{animationDelay: '2s'}}>
+                                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {/* Text Content */}
+                        <div className="space-y-4">
+                            <h2 className="text-4xl font-bold leading-tight">
+                                Join your team's<br />
+                                <span className="text-green-200">collaborative workspace</span>
+                            </h2>
+                            <p className="text-xl text-teal-100 leading-relaxed max-w-md mx-auto">
+                                Create an account and start collaborating with your team on projects, tasks, and ideas in real-time.
+                            </p>
+                        </div>
+
+                        {/* Feature Points */}
+                        <div className="grid grid-cols-2 gap-6 max-w-md mx-auto">
+                            <div className="flex items-center space-x-3">
+                                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                    </svg>
+                                </div>
+                                <span className="text-white text-sm font-medium">Real-time Chat</span>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <span className="text-white text-sm font-medium">Project Tracking</span>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                    </svg>
+                                </div>
+                                <span className="text-white text-sm font-medium">Secure & Private</span>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                                <span className="text-white text-sm font-medium">Lightning Fast</span>
+                            </div>
                         </div>
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">TracknFlow</h1>
-                    <p className="text-gray-600">Create your workspace account</p>
                 </div>
 
-                {/* Register Form */}
-                <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Right Side - Register Form */}
+                <div className="w-full lg:w-1/2 max-w-md lg:max-w-lg">
+                    {/* Logo and Brand */}
+                    <div className="text-center mb-8">
+                        <div className="flex items-center justify-center space-x-3 mb-4">
+                            <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-2xl backdrop-blur-lg border border-white/20">
+                                <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 515.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h1 className="text-3xl font-bold text-white mb-2">TracknFlow</h1>
+                        <p className="text-teal-100">Create your workspace account</p>
+                    </div>
+
+                    {/* Register Form */}
+                    <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                         {/* General Error */}
                         {errors.general && (
                             <div className="bg-red-50 border border-red-200 rounded-lg p-4">
@@ -121,7 +323,7 @@ export default function Register() {
                                 className={`w-full px-4 py-3 rounded-lg border transition-colors ${
                                     errors.username
                                         ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500'
-                                        : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                                        : 'border-gray-300 focus:border-teal-500 focus:ring-teal-500'
                                 } focus:outline-none focus:ring-2 focus:ring-opacity-50`}
                                 value={username}
                                 onChange={(e) => {
@@ -152,7 +354,7 @@ export default function Register() {
                                 className={`w-full px-4 py-3 rounded-lg border transition-colors ${
                                     errors.email
                                         ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500'
-                                        : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                                        : 'border-gray-300 focus:border-teal-500 focus:ring-teal-500'
                                 } focus:outline-none focus:ring-2 focus:ring-opacity-50`}
                                 value={email}
                                 onChange={(e) => {
@@ -184,7 +386,7 @@ export default function Register() {
                                     className={`w-full px-4 py-3 pr-12 rounded-lg border transition-colors ${
                                         errors.password
                                             ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500'
-                                            : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                                            : 'border-gray-300 focus:border-teal-500 focus:ring-teal-500'
                                     } focus:outline-none focus:ring-2 focus:ring-opacity-50`}
                                     value={password}
                                     onChange={(e) => {
@@ -237,7 +439,7 @@ export default function Register() {
                                     className={`w-full px-4 py-3 pr-12 rounded-lg border transition-colors ${
                                         errors.password2
                                             ? 'border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500'
-                                            : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                                            : 'border-gray-300 focus:border-teal-500 focus:ring-teal-500'
                                     } focus:outline-none focus:ring-2 focus:ring-opacity-50`}
                                     value={password2}
                                     onChange={(e) => {
@@ -278,7 +480,7 @@ export default function Register() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                            className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-3 px-4 rounded-lg font-medium hover:from-teal-700 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg"
                         >
                             {isLoading ? (
                                 <>
@@ -296,7 +498,7 @@ export default function Register() {
                         <div className="text-center pt-4 border-t border-gray-200">
                             <p className="text-gray-600">
                                 Already have an account?{' '}
-                                <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors">
+                                <Link to="/login" className="text-teal-600 hover:text-green-600 font-medium hover:underline transition-colors">
                                     Sign in
                                 </Link>
                             </p>
@@ -305,5 +507,6 @@ export default function Register() {
                 </div>
             </div>
         </div>
+    </div>
     );
 }

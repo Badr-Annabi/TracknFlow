@@ -12,7 +12,7 @@ import TicketDetailsModal from './TicketDetailsModal';
 import UserMenu from '../UserMenu';
 import LoadingScreen from '../LoadingScreen';
 import { AuthContext } from '../../contexts/AuthContext';
-import { fetchTickets, updateTicket, deleteTicket } from '../../services/ticketApi';
+import { fetchTickets, updateTicket } from '../../services/ticketApi';
 
 const STATUSES = ['Backlog', 'En cours', 'Validation', 'Archivé'];
 
@@ -24,6 +24,7 @@ export default function Dashboard() {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+    const [deletingTicketId, setDeletingTicketId] = useState(null);
 
     useEffect(() => {
         if (!user) return;
@@ -85,9 +86,17 @@ export default function Dashboard() {
     };
 
     const handleTicketDelete = (ticketId) => {
-        setTickets((prev) => prev.filter((ticket) => ticket.id !== ticketId));
+        // Start deletion animation
+        setDeletingTicketId(ticketId);
+        // Close modal immediately to prevent user interaction
         setDetailsModalOpen(false);
         setSelectedTicket(null);
+    };
+
+    const handleDeletionComplete = (ticketId) => {
+        // Remove ticket from state after animation completes
+        setTickets((prev) => prev.filter((ticket) => ticket.id !== ticketId));
+        setDeletingTicketId(null);
     };
 
     const handleAddCard = (status) => {
@@ -142,12 +151,12 @@ export default function Dashboard() {
 
                     {/* Navigation */}
                     <nav className="space-y-2">
-                        <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-slate-800 text-blue-300">
+                        <button className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-slate-800 text-blue-300 w-full text-left">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 0V17m0-10a2 2 0 012 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
                             </svg>
                             <span>Boards</span>
-                        </a>
+                        </button>
                         <button
                             onClick={() => navigate('/team')}
                             className="flex items-center space-x-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors w-full text-left"
@@ -174,27 +183,18 @@ export default function Dashboard() {
             {/* Main Content */}
             <div className="flex-1 flex flex-col relative z-10">
                 {/* Header */}
-                <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm">
+                                <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm relative">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Project Board</h1>
                             <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-500">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
                                 <span>Team workspace</span>
                             </div>
                         </div>
-                        <div className="flex items-center space-x-3">
-                            {/* User Avatars */}
-                            <div className="flex -space-x-2">
-                                <img className="w-8 h-8 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="User 1" />
-                                <img className="w-8 h-8 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face" alt="User 2" />
-                                <img className="w-8 h-8 rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face" alt="User 3" />
-                                <button className="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-gray-600 text-sm font-medium hover:bg-gray-200 transition-colors">
-                                    +
-                                </button>
-                            </div>
+                        <div className="flex items-center space-x-3 relative z-[50]">
                             <UserMenu />
                         </div>
                     </div>
@@ -206,7 +206,7 @@ export default function Dashboard() {
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 pointer-events-none"></div>
                     
                     <DragDropContext onDragEnd={handleDragEnd}>
-                        <div className="flex space-x-6 min-w-max relative z-10">{/* Added relative z-10 for proper layering */}
+                        <div className="flex space-x-6 min-w-max">{/* Added relative z-10 for proper layering */}
                             {STATUSES.map((status, index) => (
                                 <div 
                                     key={status} 
@@ -218,6 +218,8 @@ export default function Dashboard() {
                                         tickets={tickets.filter((t) => t.status === status)}
                                         onTicketClick={handleTicketClick}
                                         onAddCard={handleAddCard}
+                                        deletingTicketId={deletingTicketId}
+                                        onDeletionComplete={handleDeletionComplete}
                                     />
                                 </div>
                             ))}

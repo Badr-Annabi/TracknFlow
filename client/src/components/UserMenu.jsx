@@ -11,8 +11,14 @@ export default function UserMenu() {
     const [showUserMenu, setShowUserMenu] = useState(false);
 
     const handleLogout = () => {
-        console.log('Logout button clicked');
-        logout();
+        console.log('Logout button clicked from UserMenu');
+        console.log('User before logout:', user);
+        try {
+            logout();
+            console.log('Logout function called successfully');
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
         setShowUserMenu(false);
     };
 
@@ -41,7 +47,7 @@ export default function UserMenu() {
 
             {/* Dropdown Menu */}
             {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-50 animate-slideIn">
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-[100] animate-slideIn">
                     <div className="px-4 py-3 border-b border-gray-100">
                         <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
@@ -58,7 +64,10 @@ export default function UserMenu() {
                     
                     <button
                         onClick={handleLogout}
-                        className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center space-x-3 group"
+                        className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center space-x-3 group relative z-[110] cursor-pointer"
+                        style={{ pointerEvents: 'auto' }}
+                        onMouseEnter={() => console.log('Hovering logout button')}
+                        onMouseDown={() => console.log('Mouse down on logout button')}
                     >
                         <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200 transition-colors">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +82,7 @@ export default function UserMenu() {
             {/* Click outside to close menu */}
             {showUserMenu && (
                 <div 
-                    className="fixed inset-0 z-40" 
+                    className="fixed inset-0 z-[90]" 
                     onClick={() => setShowUserMenu(false)}
                 ></div>
             )}

@@ -55,6 +55,21 @@
   }
 }
 
+@keyframes fadeOutScale {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

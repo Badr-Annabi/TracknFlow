@@ -3,7 +3,7 @@
  * Trello-inspired ticket card with priority indicators and interactive elements
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Draggable } from '@hello-pangea/dnd';
 
 const priorityColors = {
@@ -20,7 +20,23 @@ const tagColors = {
     'Marketing': 'bg-green-100 text-green-800 border-green-200',
 };
 
-export default function TicketCard({ ticket, index, onClick }) {
+export default function TicketCard({ ticket, index, onClick, isDeleting, onAnimationComplete }) {
+    const [shouldRender, setShouldRender] = useState(true);
+    
+    useEffect(() => {
+        if (isDeleting) {
+            // Start deletion animation
+            const timer = setTimeout(() => {
+                setShouldRender(false);
+                if (onAnimationComplete) {
+                    onAnimationComplete();
+                }
+            }, 500); // Match animation duration
+            
+            return () => clearTimeout(timer);
+        }
+    }, [isDeleting, onAnimationComplete]);
+
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             month: 'short',
@@ -35,6 +51,8 @@ export default function TicketCard({ ticket, index, onClick }) {
         'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face'
     ];
 
+    if (!shouldRender) return null;
+
     return (
         <Draggable draggableId={ticket.id.toString()} index={index}>
             {(provided, snapshot) => (
@@ -45,11 +63,15 @@ export default function TicketCard({ ticket, index, onClick }) {
                     onClick={() => onClick(ticket)}
                     className={`
                         bg-white rounded-lg border border-gray-200 p-3 shadow-sm
-                        cursor-pointer hover:shadow-md transition-all duration-200
+                        cursor-pointer hover:shadow-md transition-all duration-500
                         ${snapshot.isDragging ? 'rotate-2 shadow-lg ring-2 ring-blue-300 ring-opacity-50' : ''}
+                        ${isDeleting ? 'animate-[fadeOutScale_0.5s_ease-in-out_forwards]' : ''}
                     `}
                     style={{
                         ...provided.draggableProps.style,
+                        ...(isDeleting && {
+                            pointerEvents: 'none',
+                        }),
                     }}
                 >
                     {/* Priority Indicator */}

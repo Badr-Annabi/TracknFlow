@@ -11,7 +11,6 @@ export default function Header() {
     const [showUserMenu, setShowUserMenu] = useState(false);
 
     const handleLogout = () => {
-        console.log('Logout button clicked'); // Debug log
         logout();
         setShowUserMenu(false);
     };

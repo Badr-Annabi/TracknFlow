@@ -41,16 +41,14 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate, onDelete
     };
 
     const handleDelete = async () => {
-        if (window.confirm('Are you sure you want to delete this ticket?')) {
-            setLoading(true);
-            try {
-                await deleteTicket(ticket.id);
-                onDelete(ticket.id);
-                onClose();
-            } catch (err) {
-                setError(err.response?.data?.message || 'Failed to delete ticket');
-                setLoading(false);
-            }
+        setLoading(true);
+        try {
+            await deleteTicket(ticket.id);
+            onDelete(ticket.id);
+            onClose();
+        } catch (err) {
+            setError(err.response?.data?.message || 'Failed to delete ticket');
+            setLoading(false);
         }
     };
 

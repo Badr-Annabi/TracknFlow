@@ -26,7 +26,7 @@ const columnStyles = {
     }
 };
 
-export default function TicketColumn({ status, tickets, onTicketClick, onAddCard }) {
+export default function TicketColumn({ status, tickets, onTicketClick, onAddCard, deletingTicketId, onDeletionComplete }) {
     const style = columnStyles[status] || columnStyles['Backlog'];
     
     return (
@@ -74,6 +74,8 @@ export default function TicketColumn({ status, tickets, onTicketClick, onAddCard
                                         ticket={ticket} 
                                         index={index} 
                                         onClick={onTicketClick}
+                                        isDeleting={deletingTicketId === ticket.id}
+                                        onAnimationComplete={() => onDeletionComplete && onDeletionComplete(ticket.id)}
                                     />
                                 </div>
                             ))}
