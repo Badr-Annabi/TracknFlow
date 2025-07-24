@@ -1,3 +1,8 @@
+/**
+ * Database Connection
+ * PostgreSQL connection pool configuration
+ */
+
 import pkg from 'pg';
 import dotenv from 'dotenv';
 
