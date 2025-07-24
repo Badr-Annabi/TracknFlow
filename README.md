@@ -1,4 +1,5 @@
 # TracknFlow Documentation
+<img width="2561" height="1358" alt="Screen Shot 2025-07-24 at 5 03 43 PM" src="https://github.com/user-attachments/assets/a388f43b-a572-40a1-b064-44a12b3ef981" />
 
 ## Project Overview
 TracknFlow is a full-stack ticket management system built with React frontend and Express.js backend. It features user authentication, ticket creation, and a vibrant Kanban-style drag-and-drop interface with Trello-inspired design.
@@ -237,6 +238,7 @@ Frontend dependencies and scripts.
 ---
 
 ## Database Schema
+<img width="185" height="559" alt="Screen Shot 2025-07-24 at 11 41 11 AM" src="https://github.com/user-attachments/assets/d8184e38-5ab8-4258-bb4b-0422fdd25fd3" />
 
 ### Users Table
 ```sql
