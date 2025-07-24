@@ -7,12 +7,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DragDropContext } from '@hello-pangea/dnd';
 import TicketColumn from './TicketColumn';
+import TicketFilters from './TicketFilters';
 import CreateTicketModal from './CreateTicketModal';
 import TicketDetailsModal from './TicketDetailsModal';
 import UserMenu from '../UserMenu';
 import LoadingScreen from '../LoadingScreen';
 import { AuthContext } from '../../contexts/AuthContext';
-import { fetchTickets, updateTicket } from '../../services/ticketApi';
+import { fetchTickets, fetchFilteredTickets, updateTicket } from '../../services/ticketApi';
 
 const STATUSES = ['todo', 'in-progress', 'done'];
 
@@ -25,18 +26,23 @@ export default function Dashboard() {
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [detailsModalOpen, setDetailsModalOpen] = useState(false);
     const [deletingTicketId, setDeletingTicketId] = useState(null);
+    const [filters, setFilters] = useState({ status: '', priority: '' });
 
     useEffect(() => {
         if (!user) return;
 
         setLoading(true);
-        fetchTickets()
+        
+        const hasFilters = filters.status || filters.priority;
+        const apiCall = hasFilters ? fetchFilteredTickets(filters) : fetchTickets();
+        
+        apiCall
             .then((data) => setTickets(data))
             .catch((err) => {
                 console.error('Failed to fetch tickets:', err);
             })
             .finally(() => setLoading(false));
-    }, [user]);
+    }, [user, filters]);
 
     const handleDragEnd = (result) => {
         const { destination, source, draggableId } = result;
@@ -63,8 +69,30 @@ export default function Dashboard() {
         });
 
         updateTicket(ticketId, { status: destination.droppableId })
+            .then(() => {
+                // If filters are active, refresh the data to ensure consistency
+                const hasFilters = filters.status || filters.priority;
+                if (hasFilters) {
+                    const apiCall = fetchFilteredTickets(filters);
+                    apiCall.then((data) => setTickets(data)).catch((err) => {
+                        console.error('Failed to refresh filtered tickets:', err);
+                    });
+                }
+            })
             .catch((err) => {
                 console.error('Failed to update ticket status:', err);
+                // Revert the optimistic update on error
+                setTickets((prevTickets) => {
+                    const revertedTickets = [...prevTickets];
+                    const ticketIndex = revertedTickets.findIndex((t) => t.id === ticketId);
+                    if (ticketIndex !== -1) {
+                        revertedTickets[ticketIndex] = {
+                            ...revertedTickets[ticketIndex],
+                            status: source.droppableId,
+                        };
+                    }
+                    return revertedTickets;
+                });
             });
     };
 
@@ -97,6 +125,14 @@ export default function Dashboard() {
         // Remove ticket from state after animation completes
         setTickets((prev) => prev.filter((ticket) => ticket.id !== ticketId));
         setDeletingTicketId(null);
+    };
+
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+    };
+
+    const handleClearFilters = () => {
+        setFilters({ status: '', priority: '' });
     };
 
     const handleAddCard = (status) => {
@@ -183,7 +219,7 @@ export default function Dashboard() {
             {/* Main Content */}
             <div className="flex-1 flex flex-col relative z-10">
                 {/* Header */}
-                                <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm relative">
+                <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm relative z-10">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
                             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Project Board</h1>
@@ -192,6 +228,8 @@ export default function Dashboard() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
                                 <span>Team workspace</span>
+                                <span className="text-gray-400">•</span>
+                                <span>{tickets.length} ticket{tickets.length !== 1 ? 's' : ''}</span>
                             </div>
                         </div>
                         <div className="flex items-center space-x-3 relative z-[50]">
@@ -199,6 +237,15 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </header>
+
+                {/* Filters */}
+                <div className="px-6 pt-4">
+                    <TicketFilters 
+                        filters={filters}
+                        onFilterChange={handleFilterChange}
+                        onClearFilters={handleClearFilters}
+                    />
+                </div>
 
                 {/* Board Content */}
                 <div className="flex-1 p-6 overflow-x-auto">
