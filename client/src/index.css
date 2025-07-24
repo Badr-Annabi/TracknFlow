@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--rotate));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--rotate));
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+/* Hover animations */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Scale animation */
+.scale-102 {
+  transform: scale(1.02);
+}
+
+/* Enhanced animations */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3) translateY(50px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.6s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Background patterns */
+.bg-pattern-dots {
+  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-pattern-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Text truncation utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Trello-inspired scrollbars */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button styles */
+.btn-trello {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-trello-primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-trello-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-trello-secondary {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.btn-trello-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
