@@ -27,6 +27,7 @@ export default function Dashboard() {
     const [detailsModalOpen, setDetailsModalOpen] = useState(false);
     const [deletingTicketId, setDeletingTicketId] = useState(null);
     const [filters, setFilters] = useState({ status: '', priority: '' });
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     useEffect(() => {
         if (!user) return;
@@ -146,17 +147,25 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 lg:flex relative overflow-hidden">
+            {/* Mobile sidebar overlay */}
+            {sidebarOpen && (
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                ></div>
+            )}
+
             {/* Background Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Subtle geometric patterns */}
-                <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-full blur-xl"></div>
-                <div className="absolute top-40 right-32 w-24 h-24 bg-gradient-to-br from-indigo-100/40 to-blue-100/40 rounded-full blur-lg"></div>
-                <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-br from-purple-100/20 to-pink-100/20 rounded-full blur-2xl"></div>
-                <div className="absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-br from-blue-100/30 to-indigo-100/30 rounded-full blur-xl"></div>
+                {/* Subtle geometric patterns - hidden on mobile for performance */}
+                <div className="hidden md:block absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-full blur-xl"></div>
+                <div className="hidden md:block absolute top-40 right-32 w-24 h-24 bg-gradient-to-br from-indigo-100/40 to-blue-100/40 rounded-full blur-lg"></div>
+                <div className="hidden md:block absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-br from-purple-100/20 to-pink-100/20 rounded-full blur-2xl"></div>
+                <div className="hidden md:block absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-br from-blue-100/30 to-indigo-100/30 rounded-full blur-xl"></div>
                 
-                {/* Floating cards pattern */}
-                <div className="absolute top-1/4 right-1/4 opacity-5">
+                {/* Floating cards pattern - hidden on mobile */}
+                <div className="hidden lg:block absolute top-1/4 right-1/4 opacity-5">
                     <div className="grid grid-cols-3 gap-2 transform rotate-12">
                         {[...Array(9)].map((_, i) => (
                             <div key={i} className={`w-8 h-6 bg-gray-400 rounded ${i % 3 === 0 ? 'bg-blue-400' : i % 3 === 1 ? 'bg-purple-400' : 'bg-indigo-400'}`}></div>
@@ -170,8 +179,11 @@ export default function Dashboard() {
                 }}>
                 </div>
             </div>
-            {/* Dark Sidebar */}
-            <div className="w-64 bg-slate-900 text-white flex-shrink-0">
+
+            {/* Sidebar */}
+            <div className={`fixed lg:static inset-y-0 left-0 z-30 w-64 bg-slate-900 text-white flex-shrink-0 transform transition-transform duration-300 ease-in-out ${
+                sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+            }`}>
                 <div className="p-6">
                     <div className="flex items-center space-x-3 mb-8">
                         <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -217,17 +229,27 @@ export default function Dashboard() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 flex flex-col relative z-10">
+            <div className="flex-1 flex flex-col relative z-10 min-h-screen lg:min-h-0">
                 {/* Header */}
-                <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm relative z-10">
+                <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-4 sm:px-6 py-4 shadow-sm relative z-10">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Project Board</h1>
+                            {/* Mobile menu button */}
+                            <button
+                                onClick={() => setSidebarOpen(true)}
+                                className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                            
+                            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Project Board</h1>
                             <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-500">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
-                                <span>Team workspace</span>
+                                <span className="hidden md:inline">Team workspace</span>
                                 <span className="text-gray-400">•</span>
                                 <span>{tickets.length} ticket{tickets.length !== 1 ? 's' : ''}</span>
                             </div>
@@ -239,7 +261,7 @@ export default function Dashboard() {
                 </header>
 
                 {/* Filters */}
-                <div className="px-6 pt-4">
+                <div className="px-4 sm:px-6 pt-4">
                     <TicketFilters 
                         filters={filters}
                         onFilterChange={handleFilterChange}
@@ -248,16 +270,16 @@ export default function Dashboard() {
                 </div>
 
                 {/* Board Content */}
-                <div className="flex-1 p-6 overflow-x-auto">
+                <div className="flex-1 p-4 sm:p-6 overflow-x-auto">
                     {/* Board background with subtle pattern */}
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/20 to-purple-50/20 pointer-events-none"></div>
                     
                     <DragDropContext onDragEnd={handleDragEnd}>
-                        <div className="flex space-x-6 min-w-max">{/* Added relative z-10 for proper layering */}
+                        <div className="flex space-x-3 sm:space-x-4 md:space-x-6 min-w-max pb-4">
                             {STATUSES.map((status, index) => (
                                 <div 
                                     key={status} 
-                                    className="w-80 animate-slideIn"
+                                    className="w-72 sm:w-80 animate-slideIn"
                                     style={{ animationDelay: `${index * 100}ms` }}
                                 >
                                     <TicketColumn
@@ -278,12 +300,12 @@ export default function Dashboard() {
             {/* Floating Action Button */}
             <button
                 onClick={() => setModalOpen(true)}
-                className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50"
+                className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 bg-blue-600 hover:bg-blue-700 text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 z-50 safe-area-bottom"
                 aria-label="Add Ticket"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-5 w-5 sm:h-6 sm:w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
