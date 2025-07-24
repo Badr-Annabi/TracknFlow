@@ -6,14 +6,28 @@
 import React, { useState } from 'react';
 import { createTicket } from '../../services/ticketApi';
 
-const PRIORITIES = ['Low', 'Medium', 'High'];
-const STATUSES = ['Backlog', 'En cours', 'Validation', 'Archivé'];
+const PRIORITIES = ['low', 'medium', 'high', 'urgent'];
+const STATUSES = ['todo', 'in-progress', 'done'];
+
+// Display names for better UX
+const PRIORITY_LABELS = {
+    'low': 'Low',
+    'medium': 'Medium', 
+    'high': 'High',
+    'urgent': 'Urgent'
+};
+
+const STATUS_LABELS = {
+    'todo': 'To Do',
+    'in-progress': 'In Progress',
+    'done': 'Done'
+};
 
 export default function CreateTicketModal({ onClose, onCreate }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [priority, setPriority] = useState('Low');
-    const [status, setStatus] = useState('Backlog');
+    const [priority, setPriority] = useState('low');
+    const [status, setStatus] = useState('todo');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -68,7 +82,7 @@ export default function CreateTicketModal({ onClose, onCreate }) {
                     >
                         {PRIORITIES.map((p) => (
                             <option key={p} value={p}>
-                                {p}
+                                {PRIORITY_LABELS[p]}
                             </option>
                         ))}
                     </select>
@@ -83,7 +97,7 @@ export default function CreateTicketModal({ onClose, onCreate }) {
                     >
                         {STATUSES.map((s) => (
                             <option key={s} value={s}>
-                                {s}
+                                {STATUS_LABELS[s]}
                             </option>
                         ))}
                     </select>

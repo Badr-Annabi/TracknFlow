@@ -11,7 +11,6 @@ export default function ComingSoon({ feature = "This feature" }) {
 
     return (
         <div className="min-h-screen bg-gray-100 flex">
-            {/* Dark Sidebar */}
             <div className="w-64 bg-slate-900 text-white flex-shrink-0">
                 <div className="p-6">
                     <div className="flex items-center space-x-3 mb-8">
@@ -26,7 +25,6 @@ export default function ComingSoon({ feature = "This feature" }) {
                         </div>
                     </div>
 
-                    {/* Navigation */}
                     <nav className="space-y-2">
                         <button
                             onClick={() => navigate('/')}
@@ -37,15 +35,15 @@ export default function ComingSoon({ feature = "This feature" }) {
                             </svg>
                             <span>Boards</span>
                         </button>
-                        <a href="#" className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                        <button className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                             feature === "Team" ? "bg-slate-800 text-blue-300" : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }`}>
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
                             </svg>
                             <span>Team</span>
-                        </a>
-                        <a href="#" className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                        </button>
+                        <button className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                             feature === "Settings" ? "bg-slate-800 text-blue-300" : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }`}>
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,21 +51,18 @@ export default function ComingSoon({ feature = "This feature" }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                             <span>Settings</span>
-                        </a>
+                        </button>
                     </nav>
                 </div>
             </div>
 
-            {/* Main Content */}
             <div className="flex-1 flex flex-col">
-                {/* Header */}
                 <header className="bg-white border-b border-gray-200 px-6 py-4">
                     <div className="flex items-center justify-between">
                         <h1 className="text-xl font-semibold text-gray-900">{feature}</h1>
                     </div>
                 </header>
 
-                {/* Coming Soon Content */}
                 <div className="flex-1 flex items-center justify-center bg-gray-50">
                     <div className="text-center max-w-md">
                         <div className="mb-8">

@@ -26,8 +26,8 @@ export const create = async (req, res) => {
             req.user.id, 
             title, 
             description, 
-            status || 'Backlog', 
-            priority || 'Low'
+            status || 'todo', 
+            priority || 'low'
         );
         res.status(201).json(ticket);
     } catch (error) {

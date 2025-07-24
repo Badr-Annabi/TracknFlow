@@ -6,8 +6,8 @@
 import React, { useState } from 'react';
 import { updateTicket, deleteTicket } from '../../services/ticketApi';
 
-const PRIORITIES = ['Low', 'Medium', 'High'];
-const STATUSES = ['Backlog', 'En cours', 'Validation', 'Archivé'];
+const PRIORITIES = ['low', 'medium', 'high', 'urgent'];
+const STATUSES = ['todo', 'in-progress', 'done'];
 
 export default function TicketDetailsModal({ ticket, onClose, onUpdate, onDelete }) {
     const [isEditing, setIsEditing] = useState(false);
@@ -63,16 +63,29 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate, onDelete
     };
 
     const priorityColors = {
-        High: 'bg-red-100 text-red-800 border-red-300',
-        Medium: 'bg-orange-100 text-orange-800 border-orange-300',
-        Low: 'bg-green-100 text-green-800 border-green-300'
+        urgent: 'bg-red-100 text-red-800 border-red-300',
+        high: 'bg-red-50 text-red-700 border-red-200',
+        medium: 'bg-orange-100 text-orange-800 border-orange-300',
+        low: 'bg-green-100 text-green-800 border-green-300'
     };
 
     const statusColors = {
-        'Backlog': 'bg-gray-100 text-gray-800 border-gray-300',
-        'En cours': 'bg-blue-100 text-blue-800 border-blue-300',
-        'Validation': 'bg-yellow-100 text-yellow-800 border-yellow-300',
-        'Archivé': 'bg-green-100 text-green-800 border-green-300'
+        'todo': 'bg-gray-100 text-gray-800 border-gray-300',
+        'in-progress': 'bg-blue-100 text-blue-800 border-blue-300',
+        'done': 'bg-green-100 text-green-800 border-green-300'
+    };
+
+    const PRIORITY_LABELS = {
+        'low': 'Low',
+        'medium': 'Medium', 
+        'high': 'High',
+        'urgent': 'Urgent'
+    };
+
+    const STATUS_LABELS = {
+        'todo': 'To Do',
+        'in-progress': 'In Progress',
+        'done': 'Done'
     };
 
     return (
@@ -134,7 +147,7 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate, onDelete
                                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     >
                                         {PRIORITIES.map((p) => (
-                                            <option key={p} value={p}>{p}</option>
+                                            <option key={p} value={p}>{PRIORITY_LABELS[p]}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -147,7 +160,7 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate, onDelete
                                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     >
                                         {STATUSES.map((s) => (
-                                            <option key={s} value={s}>{s}</option>
+                                            <option key={s} value={s}>{STATUS_LABELS[s]}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -182,14 +195,14 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate, onDelete
                                 <div>
                                     <span className="text-sm font-medium text-gray-500">Priority</span>
                                     <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium border mt-1 ${priorityColors[ticket.priority]}`}>
-                                        {ticket.priority}
+                                        {PRIORITY_LABELS[ticket.priority]}
                                     </div>
                                 </div>
 
                                 <div>
                                     <span className="text-sm font-medium text-gray-500">Status</span>
                                     <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium border mt-1 ${statusColors[ticket.status]}`}>
-                                        {ticket.status}
+                                        {STATUS_LABELS[ticket.status]}
                                     </div>
                                 </div>
                             </div>

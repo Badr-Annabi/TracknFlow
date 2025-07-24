@@ -11,11 +11,8 @@ export default function UserMenu() {
     const [showUserMenu, setShowUserMenu] = useState(false);
 
     const handleLogout = () => {
-        console.log('Logout button clicked from UserMenu');
-        console.log('User before logout:', user);
         try {
             logout();
-            console.log('Logout function called successfully');
         } catch (error) {
             console.error('Error during logout:', error);
         }
@@ -66,8 +63,6 @@ export default function UserMenu() {
                         onClick={handleLogout}
                         className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center space-x-3 group relative z-[110] cursor-pointer"
                         style={{ pointerEvents: 'auto' }}
-                        onMouseEnter={() => console.log('Hovering logout button')}
-                        onMouseDown={() => console.log('Mouse down on logout button')}
                     >
                         <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200 transition-colors">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

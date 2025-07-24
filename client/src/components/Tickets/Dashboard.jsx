@@ -14,7 +14,7 @@ import LoadingScreen from '../LoadingScreen';
 import { AuthContext } from '../../contexts/AuthContext';
 import { fetchTickets, updateTicket } from '../../services/ticketApi';
 
-const STATUSES = ['Backlog', 'En cours', 'Validation', 'Archivé'];
+const STATUSES = ['todo', 'in-progress', 'done'];
 
 export default function Dashboard() {
     const { user } = useContext(AuthContext);

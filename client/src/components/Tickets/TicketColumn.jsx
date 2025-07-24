@@ -8,33 +8,35 @@ import { Droppable } from '@hello-pangea/dnd';
 import TicketCard from './TicketCard';
 
 const columnStyles = {
-    'Backlog': {
+    'todo': {
         bg: 'bg-gray-50',
         header: 'text-gray-700'
     },
-    'En cours': {
+    'in-progress': {
         bg: 'bg-blue-50', 
         header: 'text-blue-700'
     },
-    'Validation': {
-        bg: 'bg-yellow-50',
-        header: 'text-yellow-700'
-    },
-    'Archivé': {
+    'done': {
         bg: 'bg-green-50',
         header: 'text-green-700'
     }
 };
 
+const STATUS_LABELS = {
+    'todo': 'To Do',
+    'in-progress': 'In Progress',
+    'done': 'Done'
+};
+
 export default function TicketColumn({ status, tickets, onTicketClick, onAddCard, deletingTicketId, onDeletionComplete }) {
-    const style = columnStyles[status] || columnStyles['Backlog'];
+    const style = columnStyles[status] || columnStyles['todo'];
     
     return (
         <div className="bg-gray-100 rounded-lg p-3">
             {/* Column Header */}
             <div className="flex items-center justify-between mb-4 px-2">
                 <h3 className={`font-medium text-sm ${style.header}`}>
-                    {status}
+                    {STATUS_LABELS[status]}
                 </h3>
                 <span className="bg-gray-200 text-gray-600 text-xs font-medium px-2 py-1 rounded-full">
                     {tickets.length}

@@ -7,9 +7,10 @@ import React, { useState, useEffect } from 'react';
 import { Draggable } from '@hello-pangea/dnd';
 
 const priorityColors = {
-    High: 'bg-red-500 border-red-500',
-    Medium: 'bg-orange-400 border-orange-400', 
-    Low: 'bg-green-400 border-green-400',
+    urgent: 'bg-red-500 border-red-500',
+    high: 'bg-red-400 border-red-400',
+    medium: 'bg-orange-400 border-orange-400', 
+    low: 'bg-green-400 border-green-400',
 };
 
 const tagColors = {
@@ -46,10 +47,6 @@ export default function TicketCard({ ticket, index, onClick, isDeleting, onAnima
 
     // Mock tags and team members for demo
     const mockTags = ['Brief', 'Projet Produit SAS'];
-    const mockUsers = [
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
-        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face'
-    ];
 
     if (!shouldRender) return null;
 
@@ -75,7 +72,7 @@ export default function TicketCard({ ticket, index, onClick, isDeleting, onAnima
                     }}
                 >
                     {/* Priority Indicator */}
-                    {ticket.priority && ticket.priority !== 'Low' && (
+                    {ticket.priority && ticket.priority !== 'low' && (
                         <div className={`w-full h-1 ${priorityColors[ticket.priority]} rounded-t-lg mb-3 -mt-3 -mx-3`}></div>
                     )}
 
@@ -113,25 +110,6 @@ export default function TicketCard({ ticket, index, onClick, isDeleting, onAnima
                         <span className="text-xs text-gray-500">
                             {formatDate(ticket.created_at)}
                         </span>
-
-                        {/* User Avatars */}
-                        <div className="flex -space-x-1">
-                            {mockUsers.slice(0, 2).map((avatar, idx) => (
-                                <img
-                                    key={idx}
-                                    className="w-6 h-6 rounded-full border-2 border-white"
-                                    src={avatar}
-                                    alt={`User ${idx + 1}`}
-                                />
-                            ))}
-                            {mockUsers.length > 2 && (
-                                <div className="w-6 h-6 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center">
-                                    <span className="text-xs text-gray-600 font-medium">
-                                        +{mockUsers.length - 2}
-                                    </span>
-                                </div>
-                            )}
-                        </div>
                     </div>
 
                     {/* Additional indicators */}
